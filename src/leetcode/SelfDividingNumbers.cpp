@@ -2,7 +2,7 @@ class Solution {
 public:
     bool checkNum(int a){
         string num = to_string(a);
-        //str.find("") -> ""값을 찾는다 못찾으면 string::npos 반환
+        //str.find("1") -> "1"값을 찾는다 못찾으면 string::npos 반환
         if(num.find("0") != string::npos){
             return false;
         }
