@@ -25,6 +25,7 @@ public:
     vector<string> letterCasePermutation(string S) {
         vector<string> output;
         changeStr(output, S, 0);
+        
         sort(output.begin(), output.end());
         output.erase(unique(output.begin(), output.end()), output.end());
         reverse(output.begin(), output.end());
