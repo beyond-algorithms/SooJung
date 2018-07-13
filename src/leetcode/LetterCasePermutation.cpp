@@ -1,15 +1,5 @@
 class Solution {
 public:
-    string tolowerStr(string S, int idx){
-        S[idx] = tolower(S[idx]);
-        return S;
-    }
-    string toupperStr(string S, int idx){
-        S[idx] = toupper(S[idx]);
-        return S;
-    }
-
-    
     void changeStr(vector<string>& output, string S, int idx){
         if(idx == 0){
             output.push_back(S);
