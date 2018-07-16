@@ -21,8 +21,8 @@ public:
         }
 
         int idx = find(employeesId.begin(), employeesId.end(), id) - employeesId.begin();
-        
         int sum = employees[idx]->importance;
+
         if(employees[idx]->subordinates.empty()){
             return sum;
         }
