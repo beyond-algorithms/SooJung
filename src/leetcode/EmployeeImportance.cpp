@@ -13,10 +13,6 @@ public:
 */
 class Solution {
 public:    
-
-    int getEmployeesIdx(vector<int> employeesId, int id){
-        return find(employeesId.begin(), employeesId.end(), id) - employeesId.begin();
-    }
         
     int getImportance(vector<Employee*> employees, int id) {
         vector<int> employeesId(employees.size(), -1);
@@ -24,7 +20,7 @@ public:
                 employeesId[i] = employees[i]->id;
         }
 
-        int idx = getEmployeesIdx(employeesId, id);
+        int idx = find(employeesId.begin(), employeesId.end(), id) - employeesId.begin();
         
         int sum = employees[idx]->importance;
         if(employees[idx]->subordinates.empty()){
