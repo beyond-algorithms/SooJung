@@ -15,14 +15,12 @@ public:
             S[idx] = toupper(S[idx]);
             output.push_back(S);
             changeStr(output, S, idx + 1);
-
         }
         else if(S[idx] >= 'A' && S[idx] <= 'Z'){
             S[idx] = tolower(S[idx]);
             output.push_back(S);
             changeStr(output, S, idx + 1);
         }
-        
     }
     
     vector<string> letterCasePermutation(string S) {
