@@ -22,17 +22,17 @@ public:
         vector<int> valArr;
         makeArr(root, valArr);
         
-        int minimumDifference = INT_MAX, difference;
+        int minDifference = INT_MAX, difference;
         for(int i = 0; i < valArr.size(); i++){
             for(int j = i; j < valArr.size(); j++){
                 if(i != j){
                     difference = abs(valArr[i] - valArr[j]);
-                    if(difference < minimumDifference){
-                        minimumDifference = difference;
+                    if(difference < minDifference){
+                        minDifference = difference;
                     }
                 }
             }
         }
-        return minimumDifference;
+        return minDifference;
     }
 };
