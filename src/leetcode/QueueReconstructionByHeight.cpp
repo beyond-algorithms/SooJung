@@ -4,9 +4,9 @@ public:
         sort(people.rbegin(), people.rend());        
         vector<pair<int, int>> res;
         res.reserve(people.size());
-        // for(int i = 0; i < people.size(); i++){
-        //     res.insert(res.begin() + people[i].second, people[i]);
-        // } 
+        for(int i = 0; i < people.size(); i++){
+            res.insert(res.begin() + people[i].second, people[i]);
+        } 
         return res;
         
         
