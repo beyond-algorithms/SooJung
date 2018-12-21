@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.irang.mapper.placeBoardMapper">
+	<select id="listAll" resultType="placeBoardVO">
+		SELECT * FROM RECOMMAND_TB
+	</select>
+
+	<select id="listPaging" resultType="placeBoardVO">
+ 		<![CDATA[
+ 		SELECT *
+ 		FROM RECOMMAND_TB
+ 		WHERE place_idx > 0
+ 		ORDER BY place_idx DESC
+ 		LIMIT #{pageStart}, #{perPageNum}
+ 		]]>
+	</select>
+
+	<select id="countContents" resultType="int">
+ 		<![CDATA[
+ 		SELECT
+ 			COUNT(place_idx)
+ 		FROM RECOMMAND_TB
+ 		WHERE place_idx > 0
+ 		]]>
+	</select>
+	
+	<select id="listSearch" parameterType="map" resultType="placeBoardVO">
+ 		SELECT *
+ 		FROM RECOMMAND_TB
+ 		WHERE ${searchItem} and place_idx > 0
+ 		ORDER BY place_idx DESC
+	</select>
+
+
+	<select id="read" resultType="placeBoardVO">
+		SELECT * FROM RECOMMAND_TB WHERE place_idx=#{contentIdx}
+	</select>
+
+</mapper>

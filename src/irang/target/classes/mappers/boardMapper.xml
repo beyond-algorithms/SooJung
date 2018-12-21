@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.irang.mapper.boardMapper">
+	<select id="listAll" resultType="boardVO">
+		SELECT * FROM BOARD_TB ORDER BY
+		board_idx DESC
+	</select>
+
+	<select id="listPaging" resultType="boardVO">
+ 		<![CDATA[
+ 		SELECT *
+ 		FROM BOARD_TB
+ 		WHERE board_idx > 0
+ 		ORDER BY board_idx DESC
+ 		LIMIT #{pageStart}, #{perPageNum}
+ 		]]>
+	</select>
+
+	<select id="countContents" resultType="int">
+ 		<![CDATA[
+ 		SELECT
+ 			COUNT(board_idx)
+ 		FROM BOARD_TB
+ 		WHERE board_idx > 0
+ 		]]>
+	</select>
+
+	<select id="categoryPaging" parameterType="map"
+		resultType="boardVO">
+ 	 	<![CDATA[
+ 		SELECT *
+ 		FROM BOARD_TB
+ 		WHERE board_idx > 0 and board_category = '${board_category}'
+ 		ORDER BY board_idx DESC
+ 		LIMIT ${criteria.pageStart}, ${criteria.perPageNum}
+ 		]]>
+	</select>
+
+	<select id="countCategoryContents" parameterType="map"
+		resultType="int">
+ 		<![CDATA[
+ 		SELECT
+ 			COUNT(board_idx)
+ 		FROM BOARD_TB
+ 		WHERE board_idx > 0 and board_category = '${board_category}'
+ 		]]>
+	</select>
+
+	<select id="read" resultType="boardVO">
+		SELECT * FROM BOARD_TB WHERE
+		board_idx=#{contentIdx}
+	</select>
+
+	<select id="readNext" parameterType="map" resultType="boardVO">
+		<![CDATA[
+			SELECT * FROM BOARD_TB WHERE board_idx = (SELECT MIN(board_idx) FROM BOARD_TB WHERE board_idx > #{contentIdx})		
+		]]>
+	</select>
+
+	<select id="readPrev" parameterType="map" resultType="boardVO">
+		<![CDATA[
+			SELECT * FROM BOARD_TB WHERE board_idx = (SELECT MAX(board_idx) FROM BOARD_TB WHERE board_idx < #{contentIdx})
+		]]>
+	</select>
+
+	<select id="create" resultType="boardVO">
+		INSERT INTO BOARD_TB (board_idx,
+		board_title, board_content, board_category,
+		board_writer,
+		board_datetime)
+		VALUES (#{board_idx}, #{board_title}, #{board_content},
+		#{board_category},
+		#{board_writer}, #{board_datetime})
+	</select>
+
+	<update id="update" parameterType="map">
+		UPDATE BOARD_TB
+		SET board_title
+		= '${boardVO.board_title}', board_content =
+		'${boardVO.board_content}'
+		WHERE board_idx = ${contentIdx}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM BOARD_TB
+		WHERE board_idx = #{contentIdx}
+	</delete>
+
+	<update id="updateViewCnt">
+		UPDATE BOARD_TB
+		SET board_hit = board_hit + 1
+		WHERE
+		board_idx = #{contentIdx}
+	</update>
+
+	<resultMap type="BoardVO" id="BoardResultMap">
+		<!-- <id property="boardIdx" column="board_idx" /> -->
+	</resultMap>
+</mapper>

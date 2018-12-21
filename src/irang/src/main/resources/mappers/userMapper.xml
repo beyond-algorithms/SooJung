@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.irang.mapper.userMapper">
+	<select id="login" resultType="userVO">
+		SELECT *
+		FROM USER_TB
+		WHERE user_id = #{user_id}
+	</select>
+	
+ 	<select id="register" resultType="userVO">
+		INSERT INTO USER_TB (user_name, user_id, user_nickname, user_password, user_sex) 
+		VALUES ( #{user_name}, #{user_id}, #{user_nickname}, #{user_password}, #{user_sex})		
+ 	</select>
+</mapper>
